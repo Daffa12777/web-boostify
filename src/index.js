@@ -11,11 +11,14 @@ const cors = require('cors');
 
 // Mengatur opsi CORS
 let corsOptions = {
- origin: [
-  "http://localhost:3000",
-  "http://localhost:3001",
-  "https://boostify-fe.vercel.app"
-] 
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://boostify-fe.vercel.app",
+    "https://frontend-boostify.vercel.app",
+    "https://web-boostify.vercel.app"
+  ],
+  credentials: true
   
 };
 
