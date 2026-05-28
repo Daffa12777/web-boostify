@@ -7,7 +7,7 @@
     "node": "20.x"
   },
   "scripts": {
-    "vercel-build": "prisma generate",
+    "vercel-build": "chmod +x node_modules/.bin/prisma && prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js"
