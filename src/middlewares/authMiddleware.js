@@ -25,12 +25,14 @@ const accessValidation = async (req, res, next) => {
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) {
-            return res.status(403).json({ message: 'Invalid token.' });
-        }
-        req.user = user;
-        next();
-    });
+    if (err) {
+        console.log('VERIFY ERROR:', err.message);
+        console.log('SECRET LENGTH:', process.env.JWT_SECRET ? process.env.JWT_SECRET.length : 'UNDEFINED');
+        return res.status(403).json({ message: 'Invalid token.' });
+    }
+    req.user = user;
+    next();
+});
 }
 
 module.exports = accessValidation;
