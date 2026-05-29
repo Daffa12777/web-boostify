@@ -18,7 +18,7 @@ const requestVerificationCode  = require('../features/auth/controller/verificati
 const resetPasswordController = require('../features/auth/controller/resetPasswordController')
 const predictionController = require('../features/prediction/controller/predictionController');
 
-router.get('/prediction', accessValidation, predictionController);
+router.get('/prediction', predictionController);
 router.get("/recap", accessValidation ,recapController)
 router.get('/attendances', accessValidation, attendanceController);
 router.get('/personalrec', accessValidation, personalRecordsController);
