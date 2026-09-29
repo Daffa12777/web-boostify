@@ -17,7 +17,9 @@ const verifyVerificationCode  = require('../features/auth/controller/verifyCodeC
 const requestVerificationCode  = require('../features/auth/controller/verificationController');
 const resetPasswordController = require('../features/auth/controller/resetPasswordController')
 const predictionController = require('../features/prediction/controller/predictionController');
+const getPredictionNext3Controller = require('../features/prediction/controller/predictionNext3Controller');
 
+router.get('/prediction/next3hours', getPredictionNext3Controller);
 router.get('/prediction', predictionController);
 router.get("/recap", accessValidation ,recapController)
 router.get('/attendances', accessValidation, attendanceController);
@@ -37,7 +39,6 @@ router.post("/auth/login", loginController);
 router.post("/auth/register", registerController);
 router.post("/auth/logout", accessValidation ,logoutController.logoutController);
 router.delete("/remove-token", logoutController.removeExpiredTokens)
-
 
 
 

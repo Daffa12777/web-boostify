@@ -32,3 +32,14 @@ model BlacklistedToken {
   token     String   @unique(map: "token") @db.VarChar(255)
   createdAt DateTime @db.Timestamptz(6)
 }
+
+model Prediction {
+  id              Int      @id @default(autoincrement())
+  day             Int      // 0=Minggu .. 6=Sabtu
+  hour            Int
+  predicted_count Float
+  level           String   @db.VarChar(10)
+  updated_at      DateTime @default(now())
+
+  @@unique([day, hour])
+}

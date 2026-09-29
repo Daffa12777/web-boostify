@@ -1,12 +1,11 @@
-// services/attendanceService.js
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const getAttendanceByName = async (name, page = 1, limit = 5) => {
+const getAttendanceByCode = async (assisstant_code, page = 1, limit = 5) => {
     const skip = (page - 1) * limit;
 
     const assistances = await prisma.attendance.findMany({
-        where: { name },
+        where: { assisstant_code },
         skip,
         take: limit,
         orderBy: {
@@ -14,11 +13,12 @@ const getAttendanceByName = async (name, page = 1, limit = 5) => {
         },
         select: {
             assisstant_code: true,
+            name: true,
             time: true,
         },
     });
 
-    const total = await prisma.attendance.count({ where: { name } });
+    const total = await prisma.attendance.count({ where: { assisstant_code } });
 
     if (assistances.length === 0) {
         return null;
@@ -30,8 +30,8 @@ const getAttendanceByName = async (name, page = 1, limit = 5) => {
     }));
 
     return {
-        name,
-        assistanceCode: assistances[0].assisstant_code,
+        name: assistances[0].name,
+        assistanceCode: assisstant_code,
         attendancesTime: formattedAttendances,
         total,
         currentPage: page,
@@ -40,5 +40,5 @@ const getAttendanceByName = async (name, page = 1, limit = 5) => {
 };
 
 module.exports = {
-    getAttendanceByName,
+    getAttendanceByCode,
 };
